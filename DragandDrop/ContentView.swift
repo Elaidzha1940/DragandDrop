@@ -10,22 +10,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var toDoTask: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"],
-    @State private var isProgressTask: [String] = [],
+    @State private var toDoTask: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
+    @State private var isProgressTask: [String] = []
     @State private var doneTask: [String] = []
     
     var body: some View {
         
-        VStack {
-            HStack(spacing: 35) {
-                
-            }
+        HStack(spacing: 10) {
+            ListView(title: "To Do", tasks: toDoTask)
+            ListView(title: "In Progress", tasks: isProgressTask)
+            ListView(title: "Done", tasks: doneTask)
         }
+        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .previewInterfaceOrientation(.landscapeRight)
 }
 
 struct ListView: View {
@@ -38,7 +40,20 @@ struct ListView: View {
                 .font(.system(size: 20, weight: .bold, design: .rounded))
             
             ZStack {
-            
+                RoundedRectangle(cornerRadius: 15)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.secondary)
+                
+                VStack(alignment: .leading, spacing: 15) {
+                    ForEach(tasks, id: \.self) { task in
+                        Text(task)
+                            .padding(10)
+                            .background(Color.secondary)
+                            .cornerRadius(15)
+                            .shadow(radius: 1, x: 1, y: 1)
+                            .draggable(task)
+                    }
+                }
             }
         }
     }
