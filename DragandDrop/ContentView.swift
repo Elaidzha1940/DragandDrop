@@ -11,7 +11,7 @@ import SwiftUI
 import Algorithms
 
 struct ContentView: View {
-    @State private var toDoTask: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
+    @State private var toDoTasks: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
     @State private var inProgressTask: [String] = []
     @State private var doneTask: [String] = []
     
@@ -22,12 +22,23 @@ struct ContentView: View {
     var body: some View {
         
         HStack(spacing: 10) {
-            ListView(title: "To Do", tasks: toDoTask, isTargeted: isToDoTargeted)
+            ListView(title: "To Do", tasks: toDoTasks, isTargeted: isToDoTargeted)
+                .dropDestination(for: String.self) { droppedTasks, location in
+                    for task in droppedTasks {
+                        inProgressTask.removeAll { $0 == task }
+                        doneTask.removeAll { $0 == task }
+                    }
+                    let totalTasks = toDoTasks + droppedTasks
+                    toDoTasks = Array(totalTasks.uniqued())
+                    return true
+                } isTargeted: { isTargeted in
+                    isToDoTargeted = isTargeted
+                }
             
             ListView(title: "In Progress", tasks: inProgressTask, isTargeted: isInProgressTargeted)
                 .dropDestination(for: String.self) { droppedTasks, location in
                     for task in droppedTasks {
-                        toDoTask.removeAll { $0 == task }
+                        toDoTasks.removeAll { $0 == task }
                         doneTask.removeAll { $0 == task }
                     }
                     let totalTasks = inProgressTask + droppedTasks
@@ -38,6 +49,17 @@ struct ContentView: View {
                 }
     
             ListView(title: "Done", tasks: doneTask, isTargeted: isDoneTargeted)
+            .dropDestination(for: String.self) { droppedTasks, location in
+                    for task in droppedTasks {
+                        toDoTasks.removeAll { $0 == task }
+                        inProgressTask.removeAll { $0 == task }
+                    }
+                    let totalTasks = doneTask + droppedTasks
+                    doneTask = Array(totalTasks.uniqued())
+                    return true
+                } isTargeted: { isTargeted in
+                    isDoneTargeted = isTargeted
+                }
         }
         .padding()
     }
