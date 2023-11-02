@@ -1,9 +1,11 @@
+//  /*
 //
-//  DragandDropApp.swift
-//  DragandDrop
+//  Project: DragandDrop
+//  File: DragandDropApp.swift
+//  Created by: Elaidzha Shchukin
+//  Date: 01.11.2023
 //
-//  Created by Elaidzha Shchukin on 01.11.2023.
-//
+//  */
 
 import SwiftUI
 
