@@ -9,6 +9,7 @@
 
 import SwiftUI
 import Algorithms
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @State private var toDoTasks: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
@@ -83,7 +84,7 @@ struct ListView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(isTargeted ? Color.mint.opacity(0.4) : Color.gray.opacity(0.5))
+                    .foregroundColor(isTargeted ? Color.mint.opacity(0.5) : Color.gray.opacity(0.7))
                 
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(tasks, id: \.self) { task in
@@ -99,4 +100,19 @@ struct ListView: View {
             }
         }
     }
+}
+
+struct DeveloperTask: Codable, Transferable {
+    let id: UUID
+    let title: String
+    let owner: String
+    let note: String
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .developerTask)
+    }
+}
+
+extension UTType {
+    static let developerTask = UTType(exportedAs: "https://github.com/Elaidzha1940")
 }
