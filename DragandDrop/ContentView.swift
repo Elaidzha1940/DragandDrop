@@ -19,6 +19,9 @@ struct ContentView: View {
         HStack(spacing: 10) {
             ListView(title: "To Do", tasks: toDoTask)
             ListView(title: "In Progress", tasks: isProgressTask)
+                .dropDestination(for: String.self) { droppedTasks, location in
+                    return true
+                }
             ListView(title: "Done", tasks: doneTask)
         }
         .padding()
@@ -44,13 +47,14 @@ struct ListView: View {
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.secondary)
                 
-                VStack(alignment: .leading, spacing: 15) {
+                VStack(alignment: .leading, spacing: 10) {
                     ForEach(tasks, id: \.self) { task in
                         Text(task)
+                            .foregroundColor(.white)
                             .padding(10)
-                            .background(Color.secondary)
+                            .background(Color.black.opacity(0.5))
                             .cornerRadius(15)
-                            .shadow(radius: 1, x: 1, y: 1)
+                            .shadow(color: .black, radius: 1, x: 1, y: 1)
                             .draggable(task)
                     }
                 }
