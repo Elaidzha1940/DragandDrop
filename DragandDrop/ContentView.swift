@@ -12,9 +12,9 @@ import Algorithms
 import UniformTypeIdentifiers
 
 struct ContentView: View {
-    @State private var toDoTasks: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
-    @State private var inProgressTask: [String] = []
-    @State private var doneTask: [String] = []
+    @State private var toDoTasks: [DeveloperTask] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
+    @State private var inProgressTask: [DeveloperTask] = []
+    @State private var doneTask: [DeveloperTask] = []
     
     @State private var isToDoTargeted = false
     @State private var isInProgressTargeted = false
@@ -115,4 +115,21 @@ struct DeveloperTask: Codable, Transferable {
 
 extension UTType {
     static let developerTask = UTType(exportedAs: "EliId.DragandDrop")
+}
+
+struct MockData {
+    static let taskOne = DeveloperTask(id: UUID(),
+                                       title: "Black Coffee",
+                                       owner: "ElaidzhaShchukin",
+                                       note: "Note")
+    
+    static let taskTwo = DeveloperTask(id: UUID(),
+                                       title: "Black Coffee",
+                                       owner: "ElaidzhaShchukin",
+                                       note: "Note")
+    
+    static let taskThree = DeveloperTask(id: UUID(),
+                                       title: "Black Coffee",
+                                       owner: "ElaidzhaShchukin",
+                                       note: "Note")
 }
