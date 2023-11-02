@@ -20,6 +20,7 @@
 		E4E3D7FF2AF2DEE000027182 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E4E3D8012AF2DEE100027182 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4E3D8042AF2DEE100027182 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E4E3D80E2AF3DA3D00027182 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 		E4E3D7FC2AF2DEE000027182 /* DragandDrop */ = {
 			isa = PBXGroup;
 			children = (
+				E4E3D80E2AF3DA3D00027182 /* Info.plist */,
 				E4E3D7FD2AF2DEE000027182 /* DragandDropApp.swift */,
 				E4E3D7FF2AF2DEE000027182 /* ContentView.swift */,
 				E4E3D8012AF2DEE100027182 /* Assets.xcassets */,
@@ -283,6 +285,7 @@
 				DEVELOPMENT_TEAM = 748RM22H5Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DragandDrop/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -312,6 +315,7 @@
 				DEVELOPMENT_TEAM = 748RM22H5Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DragandDrop/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

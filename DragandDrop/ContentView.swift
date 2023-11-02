@@ -114,5 +114,5 @@ struct DeveloperTask: Codable, Transferable {
 }
 
 extension UTType {
-    static let developerTask = UTType(exportedAs: "https://github.com/Elaidzha1940")
+    static let developerTask = UTType(exportedAs: "EliId.DragandDrop")
 }
