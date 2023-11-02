@@ -8,18 +8,25 @@
 //  */
 
 import SwiftUI
+import Algorithms
 
 struct ContentView: View {
     @State private var toDoTask: [String] = ["Black Coffee", "Claptone", "Loui Vegga", "Bedouin"]
-    @State private var isProgressTask: [String] = []
+    @State private var inProgressTask: [String] = []
     @State private var doneTask: [String] = []
     
     var body: some View {
         
         HStack(spacing: 10) {
             ListView(title: "To Do", tasks: toDoTask)
-            ListView(title: "In Progress", tasks: isProgressTask)
+            ListView(title: "In Progress", tasks: inProgressTask)
                 .dropDestination(for: String.self) { droppedTasks, location in
+                    for task in droppedTasks {
+                        toDoTask.removeAll { $0 == task }
+                        doneTask.removeAll { $0 == task }
+                    }
+                    let totalTasks = isProgressTask + droppedTasks
+                    inProgressTask = Array(totalTasks.uniqued())
                     return true
                 }
             ListView(title: "Done", tasks: doneTask)
@@ -30,7 +37,7 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .previewInterfaceOrientation(.landscapeRight)
+        //.previewInterfaceOrientation(.landscapeRight)
 }
 
 struct ListView: View {
@@ -45,7 +52,7 @@ struct ListView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.gray.opacity(0.5))
                 
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(tasks, id: \.self) { task in
