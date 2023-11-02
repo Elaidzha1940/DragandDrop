@@ -15,21 +15,29 @@ struct ContentView: View {
     @State private var inProgressTask: [String] = []
     @State private var doneTask: [String] = []
     
+    @State private var isToDoTargeted = false
+    @State private var isInProgressTargeted = false
+    @State private var isDoneTargeted = false
+    
     var body: some View {
         
         HStack(spacing: 10) {
-            ListView(title: "To Do", tasks: toDoTask)
-            ListView(title: "In Progress", tasks: inProgressTask)
+            ListView(title: "To Do", tasks: toDoTask, isTargeted: isToDoTargeted)
+            
+            ListView(title: "In Progress", tasks: inProgressTask, isTargeted: isInProgressTargeted)
                 .dropDestination(for: String.self) { droppedTasks, location in
                     for task in droppedTasks {
                         toDoTask.removeAll { $0 == task }
                         doneTask.removeAll { $0 == task }
                     }
-                    let totalTasks = isProgressTask + droppedTasks
+                    let totalTasks = inProgressTask + droppedTasks
                     inProgressTask = Array(totalTasks.uniqued())
                     return true
+                } isTargeted: { isTargeted in
+                    isInProgressTargeted = isTargeted
                 }
-            ListView(title: "Done", tasks: doneTask)
+    
+            ListView(title: "Done", tasks: doneTask, isTargeted: isDoneTargeted)
         }
         .padding()
     }
@@ -43,6 +51,7 @@ struct ContentView: View {
 struct ListView: View {
     let title: String
     let tasks: [String]
+    let isTargeted: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -52,7 +61,7 @@ struct ListView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.gray.opacity(0.5))
+                    .foregroundColor(isTargeted ? Color.mint.opacity(0.4) : Color.gray.opacity(0.5))
                 
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(tasks, id: \.self) { task in
